@@ -29,9 +29,8 @@ jobs:
             # Login to registry
             docker kill $(docker ps -aq)
             docker rm $(docker ps -aq)
-            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} ${{ env.REGISTRY }}
             docker pull docker.io/skipglide/dtest:latest
             docker run -d -p 80:8000 \
-            -v $(pwd)/dtest:/usr/src/app \
             --name dtest \
             docker.io/skipglide/dtest:latest

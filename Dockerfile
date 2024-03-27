@@ -12,5 +12,11 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Copy Script
+COPY entrypoint.sh /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/entrypoint.sh
+
 # Copy project
 COPY . /code/
+
+ENTRYPOINT ["/code/entrypoint.sh"]

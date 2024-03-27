@@ -3,7 +3,7 @@ version: '3'
 services:
   dtest:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python dtest/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:

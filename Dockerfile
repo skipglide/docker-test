@@ -13,8 +13,8 @@ COPY requirements.txt /code/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy Script
-COPY entrypoint.sh /usr/src/app/entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh
+COPY entrypoint.sh /code/entrypoint.sh
+RUN chmod +x /code/entrypoint.sh
 
 # Copy project
 COPY . /code/

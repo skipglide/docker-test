@@ -1,0 +1,42 @@
+name: build
+
+# 1
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the master branch
+  #push:
+  #  branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version'
+        required: true
+#2
+env:
+  REGISTRY: "docker.io/skipglide"
+  IMAGE_NAME: "dtest"
+  COMPOSE_FILE: "docker-compose.yml"
+#3
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@main
+        
+      - name: Build container image
+        run: docker-compose -f ${{ env.COMPOSE_FILE }} build
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@master
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+         
+      - name: Build and push
+        uses: docker/build-push-action@master
+        with:
+          push: true
+          tags: user/app:latest

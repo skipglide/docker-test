@@ -1,0 +1,37 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version'
+        required: true
+
+env:
+  REGISTRY: "docker.io/skipglide"
+  IMAGE_NAME: "dtest"
+  COMPOSE_FILE: "docker-compose.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to Digital Ocean droplet via SSH action
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          
+          envs: IMAGE_NAME,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_WORKSPACE
+          script: |
+            # Login to registry
+            docker kill $(docker ps -aq)
+            docker rm $(docker ps -aq)
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            docker pull docker.io/skipglide/dtest:latest
+            docker run -d -p 80:8000 \
+            -v $(pwd)/dtest:/usr/src/app \
+            --name dtest \
+            docker.io/skipglide/dtest:latest

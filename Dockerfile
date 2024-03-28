@@ -19,4 +19,4 @@ RUN chmod +x /code/entrypoint.sh
 # Copy project
 COPY . /code/
 
-ENTRYPOINT ["/code/entrypoint.sh"]
+ENTRYPOINT ["/user/local/entrypoint.sh"]

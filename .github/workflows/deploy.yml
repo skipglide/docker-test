@@ -28,6 +28,7 @@ jobs:
           script: |
             docker kill $(docker ps -aq)
             docker rm $(docker ps -aq)
+            docker image prune -f
             docker pull docker.io/skipglide/dtest:latest
             docker run -d -p 80:8000 \
             --name dtest \

@@ -13,10 +13,11 @@ COPY requirements.txt /code/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy Script
-COPY entrypoint.sh /code/entrypoint.sh
-RUN chmod +x /code/entrypoint.sh
+#COPY entrypoint.sh /code/entrypoint.sh
+#RUN chmod +x /code/entrypoint.sh
 
 # Copy project
 COPY . /code/
+RUN chmod +x /code/entrypoint.sh
 
-ENTRYPOINT ["/user/local/entrypoint.sh"]
+ENTRYPOINT ["/code/entrypoint.sh"]

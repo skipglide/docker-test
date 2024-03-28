@@ -26,7 +26,6 @@ jobs:
           
           envs: IMAGE_NAME,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_WORKSPACE
           script: |
-            # Login to registry
             docker kill $(docker ps -aq)
             docker rm $(docker ps -aq)
             docker pull docker.io/skipglide/dtest:latest

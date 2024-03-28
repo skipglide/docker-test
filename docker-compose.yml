@@ -6,6 +6,6 @@ services:
     command: python dtest/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-    entrypoint: "entrypoint.sh"
+    entrypoint: "/code/entrypoint.sh"
     ports:
       - "8000:8000"

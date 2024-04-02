@@ -38,5 +38,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@master
         with:
+          file: ./docker/django/Dockerfile
           push: true
           tags: skipglide/dtest:latest

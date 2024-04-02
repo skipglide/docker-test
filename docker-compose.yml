@@ -3,7 +3,9 @@ version: '3'
 services:
   dtest:
     build:
+      context: .
       dockerfile: ./docker/django/Dockerfile
+    image: skipglide/dtest:latest
     command: python dtest/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code

@@ -2,7 +2,8 @@ version: '3'
 
 services:
   dtest:
-    build: ~/docker/django/Dockerfile
+    build:
+      dockerfile: ./docker/django/Dockerfile
     command: python dtest/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code

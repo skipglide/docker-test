@@ -33,7 +33,7 @@ jobs:
           cat .env
       
       - name: Build image
-        run: docker compose -f docker-compose.prod.yml build
+        run: docker compose -f docker-compose.yml build
       
       - name: Login to Docker Hub
         uses: docker/login-action@master

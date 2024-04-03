@@ -24,5 +24,8 @@ from app import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name='home'),
-]   + staticfiles_urlpatterns()\
+]
+
+if settings.DEBUG:
+    urlpatterns +=staticfiles_urlpatterns()\
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

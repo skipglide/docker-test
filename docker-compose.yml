@@ -14,10 +14,10 @@ services:
       - "8000:8000"
   nginx:
     image: nginx:latest
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
     ports:
       - "80:80"
-    #build: ./docker/nginx/Dockerfile
-    #command: echo ""
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/:/etc/nginx/

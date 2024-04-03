@@ -33,7 +33,7 @@ jobs:
             docker image prune -f
             docker pull ${{ env.REGISTRY}}/dtest:latest
             docker pull ${{ env.REGISTRY}}/nginx:latest
-            docker run -d -p 80:8000 \
+            docker run -d -p 8000:8000 \
             --name dtest \
             ${{ env.REGISTRY}}/dtest:latest
             docker run -d -p 80:80 \

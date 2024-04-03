@@ -28,10 +28,8 @@ jobs:
             DOCKER_ACCESS_TOKEN=${{ secrets.DOCKER_ACCESS_TOKEN }}
             GITHUB_WORKSPACE=${{ github.workspace }}
           script: |
-            docker kill dtest || true
-            docker kill nginx || true
-            docker rm dtest || true
-            docker rm nginx || true
+            docker kill $(docker ps -aq)
+            docker rm $(docker ps -aq)
             docker image prune -f
             docker pull $REGISTRY/dtest:latest
             docker pull $REGISTRY/nginx:latest

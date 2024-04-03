@@ -16,7 +16,7 @@ services:
   nginx:
     image: skipglide/nginx:latest
     build:
-      context: ./nginx
+      context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
       - "80:80"

@@ -24,12 +24,18 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           
-          envs: IMAGE_NAME,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_WORKSPACE
-          script: |
-            docker kill $(docker ps -aq)
-            docker rm $(docker ps -aq)
+          envs: |
+            DOCKER_ACCESS_TOKEN=${{ secrets.DOCKER_ACCESS_TOKEN }}
+            GITHUB_WORKSPACE=${{ github.workspace }}
+            script: |
+            docker kill dtest nginx || true
+            docker rm dtest nginx || true
             docker image prune -f
-            docker pull docker.io/skipglide/dtest:latest
+            docker pull $REGISTRY/dtest:latest
+            docker pull $REGISTRY/nginx:latest
             docker run -d -p 80:8000 \
             --name dtest \
-            docker.io/skipglide/dtest:latest
+            $REGISTRY/dtest:latest
+            docker run -d -p 80:80 \
+            --name nginx \
+            $REGISTRY/nginx:latest

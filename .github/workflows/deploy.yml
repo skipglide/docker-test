@@ -31,11 +31,11 @@ jobs:
             docker kill $(docker ps -aq)
             docker rm $(docker ps -aq)
             docker image prune -f
-            docker pull $REGISTRY/dtest:latest
-            docker pull $REGISTRY/nginx:latest
+            docker pull ${{ env.REGISTRY}}/dtest:latest
+            docker pull ${{ env.REGISTRY}}/nginx:latest
             docker run -d -p 80:8000 \
             --name dtest \
-            $REGISTRY/dtest:latest
+            ${{ env.REGISTRY}}/dtest:latest
             docker run -d -p 80:80 \
             --name nginx \
-            $REGISTRY/nginx:latest
+            ${{ env.REGISTRY}}/nginx:latest

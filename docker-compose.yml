@@ -13,7 +13,7 @@ services:
     ports:
       - "8000:8000"
   nginx:
-    image: nginx:latest
+    image: skipglide/nginx:latest
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile

@@ -18,7 +18,7 @@ env:
   REGISTRY: "docker.io/skipglide"
   IMAGE_NAME: "dtest"
   COMPOSE_FILE: "docker-compose.yml"
-#3
+#3 https://gist.github.com/Aldo111/702f1146fb88f2c14f7b5955bec3d101
 jobs:
   build_and_push:
     runs-on: ubuntu-latest

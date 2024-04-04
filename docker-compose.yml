@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
     image: skipglide/dtest:latest
+    networks:
+      - d_net
     expose:
       - 8000
     volumes:
@@ -16,8 +18,14 @@ services:
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
+    networks:
+      - d_net
     ports:
       - 80:80
     volumes:
       - ./nginx:/etc/nginx
       - ./static:/usr/share/nginx/html/static
+
+networks:
+  d_net:
+    external: true

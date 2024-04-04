@@ -6,11 +6,11 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
     image: skipglide/dtest:latest
+    expose:
+      - 8000
     volumes:
       - .:/code
       - ./static:/usr/share/nginx/html/static
-    ports:
-      - 8000:8000
   nginx:
     image: skipglide/nginx:latest
     build:

@@ -6,22 +6,18 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
     image: skipglide/dtest:latest
-    command: gunicorn dtest.wsgi:application --bind 0.0.0.0:8000
-    expose:
-      - 8000
     volumes:
       - .:/code
       - ./static:/usr/share/nginx/html/static
-    entrypoint: /code/entrypoint.sh
     ports:
-      - "8000:8000"
+      - 8000:8000
   nginx:
     image: skipglide/nginx:latest
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - "80:80"
+      - 80:80
     volumes:
       - ./nginx:/etc/nginx
       - ./static:/usr/share/nginx/html/static
